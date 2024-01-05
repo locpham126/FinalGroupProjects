@@ -12,7 +12,6 @@ entity Video {
     year Integer
     classification String
     duration Integer
-    categories Collection
     episode Integer
     season Integer
     rating Rating
