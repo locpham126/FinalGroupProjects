@@ -1,0 +1,68 @@
+
+entity UserProfile {
+	userName String
+    firstName String
+    lastName String
+    email String
+}
+
+entity Video {
+	title String
+    description String
+    year Integer
+    classification String
+    duration Integer
+    categories Collection
+    episode Integer
+    season Integer
+    rating Rating
+    videoURL String
+}
+
+// an ignored comment
+/** not an ignored comment */
+entity Playlist {
+}
+
+entity Comment {
+	post String
+    thumbsUp Integer
+}
+
+/**
+ * Task entity.
+ * @author The JHipster team.
+ */
+entity Category {
+	categoryName String
+}
+
+/**
+ * The Employee entity.
+ */
+
+
+enum Rating {
+    G, TV_Y, TV_Y7, PG, PG13, TV_14, TV_MA, R, NR
+}
+
+relationship OneToOne {
+	UserProfile{playlist} to Playlist
+}
+
+relationship ManyToMany {
+	Playlist{videos} to Video
+}
+
+relationship ManyToOne {
+	Comment{video} to Video{comments}
+}
+
+relationship OneToMany {
+	UserProfile{comments} to Comment{postedBy}
+}
+
+// defining multiple OneToMany relationships with comments
+relationship ManyToMany {
+	Category{videos} to Video{categories}
+}
