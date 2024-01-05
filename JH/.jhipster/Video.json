@@ -1,0 +1,65 @@
+{
+  "annotations": {
+    "changelogDate": "20240105223846"
+  },
+  "applications": "*",
+  "entityTableName": "video",
+  "fields": [
+    {
+      "fieldName": "title",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "year",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "classification",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "duration",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "episode",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "season",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "rating",
+      "fieldType": "Rating",
+      "fieldTypeDocumentation": "The Employee entity.",
+      "fieldValues": "G,TV_Y,TV_Y7,PG,PG13,TV_14,TV_MA,R,NR"
+    },
+    {
+      "fieldName": "videoURL",
+      "fieldType": "String"
+    }
+  ],
+  "name": "Video",
+  "relationships": [
+    {
+      "otherEntityName": "comment",
+      "otherEntityRelationshipName": "video",
+      "relationshipName": "comments",
+      "relationshipSide": "right",
+      "relationshipType": "one-to-many"
+    },
+    {
+      "otherEntityName": "category",
+      "otherEntityRelationshipName": "videos",
+      "relationshipName": "categories",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "searchEngine": "no"
+}

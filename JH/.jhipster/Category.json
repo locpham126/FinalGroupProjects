@@ -1,0 +1,25 @@
+{
+  "annotations": {
+    "changelogDate": "20240105224146"
+  },
+  "applications": "*",
+  "documentation": "Task entity.\\n@author The JHipster team.",
+  "entityTableName": "category",
+  "fields": [
+    {
+      "fieldName": "categoryName",
+      "fieldType": "String"
+    }
+  ],
+  "name": "Category",
+  "relationships": [
+    {
+      "otherEntityName": "video",
+      "otherEntityRelationshipName": "categories",
+      "relationshipName": "videos",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "searchEngine": "no"
+}

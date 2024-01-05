@@ -1,0 +1,35 @@
+{
+  "annotations": {
+    "changelogDate": "20240105224046"
+  },
+  "applications": "*",
+  "entityTableName": "comment",
+  "fields": [
+    {
+      "fieldName": "post",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "thumbsUp",
+      "fieldType": "Integer"
+    }
+  ],
+  "name": "Comment",
+  "relationships": [
+    {
+      "otherEntityName": "video",
+      "otherEntityRelationshipName": "comments",
+      "relationshipName": "video",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "userProfile",
+      "otherEntityRelationshipName": "comments",
+      "relationshipName": "postedBy",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no"
+}

@@ -1,0 +1,19 @@
+{
+  "annotations": {
+    "changelogDate": "20240105223946"
+  },
+  "applications": "*",
+  "documentation": "not an ignored comment",
+  "entityTableName": "playlist",
+  "fields": [],
+  "name": "Playlist",
+  "relationships": [
+    {
+      "otherEntityName": "video",
+      "relationshipName": "videos",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "searchEngine": "no"
+}
