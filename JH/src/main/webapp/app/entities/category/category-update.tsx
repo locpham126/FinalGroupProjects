@@ -118,7 +118,7 @@ export const CategoryUpdate = () => {
                 {videos
                   ? videos.map(otherEntity => (
                       <option value={otherEntity.id} key={otherEntity.id}>
-                        {otherEntity.id}
+                        {otherEntity.id} - {otherEntity.title}
                       </option>
                     ))
                   : null}
