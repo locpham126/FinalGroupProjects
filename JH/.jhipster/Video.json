@@ -1,6 +1,6 @@
 {
   "annotations": {
-    "changelogDate": "20240105223846"
+    "changelogDate": "20240108151116"
   },
   "applications": "*",
   "entityTableName": "video",
@@ -14,7 +14,7 @@
       "fieldType": "String"
     },
     {
-      "fieldName": "year",
+      "fieldName": "releaseYear",
       "fieldType": "Integer"
     },
     {

@@ -66,14 +66,16 @@ export const Playlist = () => {
   return (
     <div>
       <h2 id="playlist-heading" data-cy="PlaylistHeading">
-        Playlists
+        <Translate contentKey="jhApp.playlist.home.title">Playlists</Translate>
         <div className="d-flex justify-content-end">
           <Button className="me-2" color="info" onClick={handleSyncList} disabled={loading}>
-            <FontAwesomeIcon icon="sync" spin={loading} /> Refresh list
+            <FontAwesomeIcon icon="sync" spin={loading} />{' '}
+            <Translate contentKey="jhApp.playlist.home.refreshListLabel">Refresh List</Translate>
           </Button>
           <Link to="/playlist/new" className="btn btn-primary jh-create-entity" id="jh-create-entity" data-cy="entityCreateButton">
             <FontAwesomeIcon icon="plus" />
-            &nbsp; Create a new Playlist
+            &nbsp;
+            <Translate contentKey="jhApp.playlist.home.createLabel">Create new Playlist</Translate>
           </Link>
         </div>
       </h2>
@@ -83,10 +85,10 @@ export const Playlist = () => {
             <thead>
               <tr>
                 <th className="hand" onClick={sort('id')}>
-                  ID <FontAwesomeIcon icon={getSortIconByFieldName('id')} />
+                  <Translate contentKey="jhApp.playlist.id">ID</Translate> <FontAwesomeIcon icon={getSortIconByFieldName('id')} />
                 </th>
                 <th>
-                  Videos <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="jhApp.playlist.videos">Videos</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th />
               </tr>
@@ -112,10 +114,16 @@ export const Playlist = () => {
                   <td className="text-end">
                     <div className="btn-group flex-btn-group-container">
                       <Button tag={Link} to={`/playlist/${playlist.id}`} color="info" size="sm" data-cy="entityDetailsButton">
-                        <FontAwesomeIcon icon="eye" /> <span className="d-none d-md-inline">View</span>
+                        <FontAwesomeIcon icon="eye" />{' '}
+                        <span className="d-none d-md-inline">
+                          <Translate contentKey="entity.action.view">View</Translate>
+                        </span>
                       </Button>
                       <Button tag={Link} to={`/playlist/${playlist.id}/edit`} color="primary" size="sm" data-cy="entityEditButton">
-                        <FontAwesomeIcon icon="pencil-alt" /> <span className="d-none d-md-inline">Edit</span>
+                        <FontAwesomeIcon icon="pencil-alt" />{' '}
+                        <span className="d-none d-md-inline">
+                          <Translate contentKey="entity.action.edit">Edit</Translate>
+                        </span>
                       </Button>
                       <Button
                         onClick={() => (window.location.href = `/playlist/${playlist.id}/delete`)}
@@ -123,7 +131,10 @@ export const Playlist = () => {
                         size="sm"
                         data-cy="entityDeleteButton"
                       >
-                        <FontAwesomeIcon icon="trash" /> <span className="d-none d-md-inline">Delete</span>
+                        <FontAwesomeIcon icon="trash" />{' '}
+                        <span className="d-none d-md-inline">
+                          <Translate contentKey="entity.action.delete">Delete</Translate>
+                        </span>
                       </Button>
                     </div>
                   </td>
@@ -132,7 +143,11 @@ export const Playlist = () => {
             </tbody>
           </Table>
         ) : (
-          !loading && <div className="alert alert-warning">No Playlists found</div>
+          !loading && (
+            <div className="alert alert-warning">
+              <Translate contentKey="jhApp.playlist.home.notFound">No Playlists found</Translate>
+            </div>
+          )
         )}
       </div>
     </div>

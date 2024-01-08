@@ -66,14 +66,16 @@ export const Category = () => {
   return (
     <div>
       <h2 id="category-heading" data-cy="CategoryHeading">
-        Categories
+        <Translate contentKey="jhApp.category.home.title">Categories</Translate>
         <div className="d-flex justify-content-end">
           <Button className="me-2" color="info" onClick={handleSyncList} disabled={loading}>
-            <FontAwesomeIcon icon="sync" spin={loading} /> Refresh list
+            <FontAwesomeIcon icon="sync" spin={loading} />{' '}
+            <Translate contentKey="jhApp.category.home.refreshListLabel">Refresh List</Translate>
           </Button>
           <Link to="/category/new" className="btn btn-primary jh-create-entity" id="jh-create-entity" data-cy="entityCreateButton">
             <FontAwesomeIcon icon="plus" />
-            &nbsp; Create a new Category
+            &nbsp;
+            <Translate contentKey="jhApp.category.home.createLabel">Create new Category</Translate>
           </Link>
         </div>
       </h2>
@@ -83,13 +85,14 @@ export const Category = () => {
             <thead>
               <tr>
                 <th className="hand" onClick={sort('id')}>
-                  ID <FontAwesomeIcon icon={getSortIconByFieldName('id')} />
+                  <Translate contentKey="jhApp.category.id">ID</Translate> <FontAwesomeIcon icon={getSortIconByFieldName('id')} />
                 </th>
                 <th className="hand" onClick={sort('categoryName')}>
-                  Category Name <FontAwesomeIcon icon={getSortIconByFieldName('categoryName')} />
+                  <Translate contentKey="jhApp.category.categoryName">Category Name</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('categoryName')} />
                 </th>
                 <th>
-                  Videos <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="jhApp.category.videos">Videos</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th />
               </tr>
@@ -116,10 +119,16 @@ export const Category = () => {
                   <td className="text-end">
                     <div className="btn-group flex-btn-group-container">
                       <Button tag={Link} to={`/category/${category.id}`} color="info" size="sm" data-cy="entityDetailsButton">
-                        <FontAwesomeIcon icon="eye" /> <span className="d-none d-md-inline">View</span>
+                        <FontAwesomeIcon icon="eye" />{' '}
+                        <span className="d-none d-md-inline">
+                          <Translate contentKey="entity.action.view">View</Translate>
+                        </span>
                       </Button>
                       <Button tag={Link} to={`/category/${category.id}/edit`} color="primary" size="sm" data-cy="entityEditButton">
-                        <FontAwesomeIcon icon="pencil-alt" /> <span className="d-none d-md-inline">Edit</span>
+                        <FontAwesomeIcon icon="pencil-alt" />{' '}
+                        <span className="d-none d-md-inline">
+                          <Translate contentKey="entity.action.edit">Edit</Translate>
+                        </span>
                       </Button>
                       <Button
                         onClick={() => (window.location.href = `/category/${category.id}/delete`)}
@@ -127,7 +136,10 @@ export const Category = () => {
                         size="sm"
                         data-cy="entityDeleteButton"
                       >
-                        <FontAwesomeIcon icon="trash" /> <span className="d-none d-md-inline">Delete</span>
+                        <FontAwesomeIcon icon="trash" />{' '}
+                        <span className="d-none d-md-inline">
+                          <Translate contentKey="entity.action.delete">Delete</Translate>
+                        </span>
                       </Button>
                     </div>
                   </td>
@@ -136,7 +148,11 @@ export const Category = () => {
             </tbody>
           </Table>
         ) : (
-          !loading && <div className="alert alert-warning">No Categories found</div>
+          !loading && (
+            <div className="alert alert-warning">
+              <Translate contentKey="jhApp.category.home.notFound">No Categories found</Translate>
+            </div>
+          )
         )}
       </div>
     </div>

@@ -7,7 +7,7 @@ export interface IVideo {
   id?: number;
   title?: string | null;
   description?: string | null;
-  year?: number | null;
+  releaseYear?: number | null;
   classification?: string | null;
   duration?: number | null;
   episode?: number | null;

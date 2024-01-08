@@ -66,14 +66,16 @@ export const Video = () => {
   return (
     <div>
       <h2 id="video-heading" data-cy="VideoHeading">
-        Videos
+        <Translate contentKey="jhApp.video.home.title">Videos</Translate>
         <div className="d-flex justify-content-end">
           <Button className="me-2" color="info" onClick={handleSyncList} disabled={loading}>
-            <FontAwesomeIcon icon="sync" spin={loading} /> Refresh list
+            <FontAwesomeIcon icon="sync" spin={loading} />{' '}
+            <Translate contentKey="jhApp.video.home.refreshListLabel">Refresh List</Translate>
           </Button>
           <Link to="/video/new" className="btn btn-primary jh-create-entity" id="jh-create-entity" data-cy="entityCreateButton">
             <FontAwesomeIcon icon="plus" />
-            &nbsp; Create a new Video
+            &nbsp;
+            <Translate contentKey="jhApp.video.home.createLabel">Create new Video</Translate>
           </Link>
         </div>
       </h2>
@@ -83,34 +85,40 @@ export const Video = () => {
             <thead>
               <tr>
                 <th className="hand" onClick={sort('id')}>
-                  ID <FontAwesomeIcon icon={getSortIconByFieldName('id')} />
+                  <Translate contentKey="jhApp.video.id">ID</Translate> <FontAwesomeIcon icon={getSortIconByFieldName('id')} />
                 </th>
                 <th className="hand" onClick={sort('title')}>
-                  Title <FontAwesomeIcon icon={getSortIconByFieldName('title')} />
+                  <Translate contentKey="jhApp.video.title">Title</Translate> <FontAwesomeIcon icon={getSortIconByFieldName('title')} />
                 </th>
                 <th className="hand" onClick={sort('description')}>
-                  Description <FontAwesomeIcon icon={getSortIconByFieldName('description')} />
+                  <Translate contentKey="jhApp.video.description">Description</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('description')} />
                 </th>
-                <th className="hand" onClick={sort('year')}>
-                  Year <FontAwesomeIcon icon={getSortIconByFieldName('year')} />
+                <th className="hand" onClick={sort('releaseYear')}>
+                  <Translate contentKey="jhApp.video.releaseYear">Release Year</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('releaseYear')} />
                 </th>
                 <th className="hand" onClick={sort('classification')}>
-                  Classification <FontAwesomeIcon icon={getSortIconByFieldName('classification')} />
+                  <Translate contentKey="jhApp.video.classification">Classification</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('classification')} />
                 </th>
                 <th className="hand" onClick={sort('duration')}>
-                  Duration <FontAwesomeIcon icon={getSortIconByFieldName('duration')} />
+                  <Translate contentKey="jhApp.video.duration">Duration</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('duration')} />
                 </th>
                 <th className="hand" onClick={sort('episode')}>
-                  Episode <FontAwesomeIcon icon={getSortIconByFieldName('episode')} />
+                  <Translate contentKey="jhApp.video.episode">Episode</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('episode')} />
                 </th>
                 <th className="hand" onClick={sort('season')}>
-                  Season <FontAwesomeIcon icon={getSortIconByFieldName('season')} />
+                  <Translate contentKey="jhApp.video.season">Season</Translate> <FontAwesomeIcon icon={getSortIconByFieldName('season')} />
                 </th>
                 <th className="hand" onClick={sort('rating')}>
-                  Rating <FontAwesomeIcon icon={getSortIconByFieldName('rating')} />
+                  <Translate contentKey="jhApp.video.rating">Rating</Translate> <FontAwesomeIcon icon={getSortIconByFieldName('rating')} />
                 </th>
                 <th className="hand" onClick={sort('videoURL')}>
-                  Video URL <FontAwesomeIcon icon={getSortIconByFieldName('videoURL')} />
+                  <Translate contentKey="jhApp.video.videoURL">Video URL</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('videoURL')} />
                 </th>
                 <th />
               </tr>
@@ -125,20 +133,28 @@ export const Video = () => {
                   </td>
                   <td>{video.title}</td>
                   <td>{video.description}</td>
-                  <td>{video.year}</td>
+                  <td>{video.releaseYear}</td>
                   <td>{video.classification}</td>
                   <td>{video.duration}</td>
                   <td>{video.episode}</td>
                   <td>{video.season}</td>
-                  <td>{video.rating}</td>
+                  <td>
+                    <Translate contentKey={`jhApp.Rating.${video.rating}`} />
+                  </td>
                   <td>{video.videoURL}</td>
                   <td className="text-end">
                     <div className="btn-group flex-btn-group-container">
                       <Button tag={Link} to={`/video/${video.id}`} color="info" size="sm" data-cy="entityDetailsButton">
-                        <FontAwesomeIcon icon="eye" /> <span className="d-none d-md-inline">View</span>
+                        <FontAwesomeIcon icon="eye" />{' '}
+                        <span className="d-none d-md-inline">
+                          <Translate contentKey="entity.action.view">View</Translate>
+                        </span>
                       </Button>
                       <Button tag={Link} to={`/video/${video.id}/edit`} color="primary" size="sm" data-cy="entityEditButton">
-                        <FontAwesomeIcon icon="pencil-alt" /> <span className="d-none d-md-inline">Edit</span>
+                        <FontAwesomeIcon icon="pencil-alt" />{' '}
+                        <span className="d-none d-md-inline">
+                          <Translate contentKey="entity.action.edit">Edit</Translate>
+                        </span>
                       </Button>
                       <Button
                         onClick={() => (window.location.href = `/video/${video.id}/delete`)}
@@ -146,7 +162,10 @@ export const Video = () => {
                         size="sm"
                         data-cy="entityDeleteButton"
                       >
-                        <FontAwesomeIcon icon="trash" /> <span className="d-none d-md-inline">Delete</span>
+                        <FontAwesomeIcon icon="trash" />{' '}
+                        <span className="d-none d-md-inline">
+                          <Translate contentKey="entity.action.delete">Delete</Translate>
+                        </span>
                       </Button>
                     </div>
                   </td>
@@ -155,7 +174,11 @@ export const Video = () => {
             </tbody>
           </Table>
         ) : (
-          !loading && <div className="alert alert-warning">No Videos found</div>
+          !loading && (
+            <div className="alert alert-warning">
+              <Translate contentKey="jhApp.video.home.notFound">No Videos found</Translate>
+            </div>
+          )
         )}
       </div>
     </div>

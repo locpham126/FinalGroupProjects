@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { Button, Row, Col, FormText } from 'reactstrap';
-import { isNumber, ValidatedField, ValidatedForm } from 'react-jhipster';
+import { isNumber, Translate, translate, ValidatedField, ValidatedForm } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { convertDateTimeFromServer, convertDateTimeToServer, displayDefaultDateTime } from 'app/shared/util/date-utils';
@@ -79,7 +79,7 @@ export const CategoryUpdate = () => {
       <Row className="justify-content-center">
         <Col md="8">
           <h2 id="jhApp.category.home.createOrEditLabel" data-cy="CategoryCreateUpdateHeading">
-            Create or edit a Category
+            <Translate contentKey="jhApp.category.home.createOrEditLabel">Create or edit a Category</Translate>
           </h2>
         </Col>
       </Row>
@@ -89,9 +89,31 @@ export const CategoryUpdate = () => {
             <p>Loading...</p>
           ) : (
             <ValidatedForm defaultValues={defaultValues()} onSubmit={saveEntity}>
-              {!isNew ? <ValidatedField name="id" required readOnly id="category-id" label="ID" validate={{ required: true }} /> : null}
-              <ValidatedField label="Category Name" id="category-categoryName" name="categoryName" data-cy="categoryName" type="text" />
-              <ValidatedField label="Videos" id="category-videos" data-cy="videos" type="select" multiple name="videos">
+              {!isNew ? (
+                <ValidatedField
+                  name="id"
+                  required
+                  readOnly
+                  id="category-id"
+                  label={translate('global.field.id')}
+                  validate={{ required: true }}
+                />
+              ) : null}
+              <ValidatedField
+                label={translate('jhApp.category.categoryName')}
+                id="category-categoryName"
+                name="categoryName"
+                data-cy="categoryName"
+                type="text"
+              />
+              <ValidatedField
+                label={translate('jhApp.category.videos')}
+                id="category-videos"
+                data-cy="videos"
+                type="select"
+                multiple
+                name="videos"
+              >
                 <option value="" key="0" />
                 {videos
                   ? videos.map(otherEntity => (
@@ -104,12 +126,15 @@ export const CategoryUpdate = () => {
               <Button tag={Link} id="cancel-save" data-cy="entityCreateCancelButton" to="/category" replace color="info">
                 <FontAwesomeIcon icon="arrow-left" />
                 &nbsp;
-                <span className="d-none d-md-inline">Back</span>
+                <span className="d-none d-md-inline">
+                  <Translate contentKey="entity.action.back">Back</Translate>
+                </span>
               </Button>
               &nbsp;
               <Button color="primary" id="save-entity" data-cy="entityCreateSaveButton" type="submit" disabled={updating}>
                 <FontAwesomeIcon icon="save" />
-                &nbsp; Save
+                &nbsp;
+                <Translate contentKey="entity.action.save">Save</Translate>
               </Button>
             </ValidatedForm>
           )}

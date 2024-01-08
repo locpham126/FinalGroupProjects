@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { Button, Row, Col } from 'reactstrap';
-import {} from 'react-jhipster';
+import { Translate } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { useAppDispatch, useAppSelector } from 'app/config/store';
@@ -21,17 +21,25 @@ export const CategoryDetail = () => {
   return (
     <Row>
       <Col md="8">
-        <h2 data-cy="categoryDetailsHeading">Category</h2>
+        <h2 data-cy="categoryDetailsHeading">
+          <Translate contentKey="jhApp.category.detail.title">Category</Translate>
+        </h2>
         <dl className="jh-entity-details">
           <dt>
-            <span id="id">ID</span>
+            <span id="id">
+              <Translate contentKey="global.field.id">ID</Translate>
+            </span>
           </dt>
           <dd>{categoryEntity.id}</dd>
           <dt>
-            <span id="categoryName">Category Name</span>
+            <span id="categoryName">
+              <Translate contentKey="jhApp.category.categoryName">Category Name</Translate>
+            </span>
           </dt>
           <dd>{categoryEntity.categoryName}</dd>
-          <dt>Videos</dt>
+          <dt>
+            <Translate contentKey="jhApp.category.videos">Videos</Translate>
+          </dt>
           <dd>
             {categoryEntity.videos
               ? categoryEntity.videos.map((val, i) => (
@@ -44,11 +52,17 @@ export const CategoryDetail = () => {
           </dd>
         </dl>
         <Button tag={Link} to="/category" replace color="info" data-cy="entityDetailsBackButton">
-          <FontAwesomeIcon icon="arrow-left" /> <span className="d-none d-md-inline">Back</span>
+          <FontAwesomeIcon icon="arrow-left" />{' '}
+          <span className="d-none d-md-inline">
+            <Translate contentKey="entity.action.back">Back</Translate>
+          </span>
         </Button>
         &nbsp;
         <Button tag={Link} to={`/category/${categoryEntity.id}/edit`} replace color="primary">
-          <FontAwesomeIcon icon="pencil-alt" /> <span className="d-none d-md-inline">Edit</span>
+          <FontAwesomeIcon icon="pencil-alt" />{' '}
+          <span className="d-none d-md-inline">
+            <Translate contentKey="entity.action.edit">Edit</Translate>
+          </span>
         </Button>
       </Col>
     </Row>

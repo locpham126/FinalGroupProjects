@@ -31,8 +31,8 @@ public class Video implements Serializable {
     @Column(name = "description")
     private String description;
 
-    @Column(name = "year")
-    private Integer year;
+    @Column(name = "release_year")
+    private Integer releaseYear;
 
     @Column(name = "classification")
     private String classification;
@@ -109,17 +109,17 @@ public class Video implements Serializable {
         this.description = description;
     }
 
-    public Integer getYear() {
-        return this.year;
+    public Integer getReleaseYear() {
+        return this.releaseYear;
     }
 
-    public Video year(Integer year) {
-        this.setYear(year);
+    public Video releaseYear(Integer releaseYear) {
+        this.setReleaseYear(releaseYear);
         return this;
     }
 
-    public void setYear(Integer year) {
-        this.year = year;
+    public void setReleaseYear(Integer releaseYear) {
+        this.releaseYear = releaseYear;
     }
 
     public String getClassification() {
@@ -319,7 +319,7 @@ public class Video implements Serializable {
             "id=" + getId() +
             ", title='" + getTitle() + "'" +
             ", description='" + getDescription() + "'" +
-            ", year=" + getYear() +
+            ", releaseYear=" + getReleaseYear() +
             ", classification='" + getClassification() + "'" +
             ", duration=" + getDuration() +
             ", episode=" + getEpisode() +

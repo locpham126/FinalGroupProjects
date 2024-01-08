@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { Button, Row, Col, FormText } from 'reactstrap';
-import { isNumber, ValidatedField, ValidatedForm } from 'react-jhipster';
+import { isNumber, Translate, translate, ValidatedField, ValidatedForm } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { convertDateTimeFromServer, convertDateTimeToServer, displayDefaultDateTime } from 'app/shared/util/date-utils';
@@ -58,8 +58,8 @@ export const VideoUpdate = () => {
     if (values.id !== undefined && typeof values.id !== 'number') {
       values.id = Number(values.id);
     }
-    if (values.year !== undefined && typeof values.year !== 'number') {
-      values.year = Number(values.year);
+    if (values.releaseYear !== undefined && typeof values.releaseYear !== 'number') {
+      values.releaseYear = Number(values.releaseYear);
     }
     if (values.duration !== undefined && typeof values.duration !== 'number') {
       values.duration = Number(values.duration);
@@ -96,7 +96,7 @@ export const VideoUpdate = () => {
       <Row className="justify-content-center">
         <Col md="8">
           <h2 id="jhApp.video.home.createOrEditLabel" data-cy="VideoCreateUpdateHeading">
-            Create or edit a Video
+            <Translate contentKey="jhApp.video.home.createOrEditLabel">Create or edit a Video</Translate>
           </h2>
         </Col>
       </Row>
@@ -106,31 +106,73 @@ export const VideoUpdate = () => {
             <p>Loading...</p>
           ) : (
             <ValidatedForm defaultValues={defaultValues()} onSubmit={saveEntity}>
-              {!isNew ? <ValidatedField name="id" required readOnly id="video-id" label="ID" validate={{ required: true }} /> : null}
-              <ValidatedField label="Title" id="video-title" name="title" data-cy="title" type="text" />
-              <ValidatedField label="Description" id="video-description" name="description" data-cy="description" type="text" />
-              <ValidatedField label="Year" id="video-year" name="year" data-cy="year" type="text" />
-              <ValidatedField label="Classification" id="video-classification" name="classification" data-cy="classification" type="text" />
-              <ValidatedField label="Duration" id="video-duration" name="duration" data-cy="duration" type="text" />
-              <ValidatedField label="Episode" id="video-episode" name="episode" data-cy="episode" type="text" />
-              <ValidatedField label="Season" id="video-season" name="season" data-cy="season" type="text" />
-              <ValidatedField label="Rating" id="video-rating" name="rating" data-cy="rating" type="select">
+              {!isNew ? (
+                <ValidatedField
+                  name="id"
+                  required
+                  readOnly
+                  id="video-id"
+                  label={translate('global.field.id')}
+                  validate={{ required: true }}
+                />
+              ) : null}
+              <ValidatedField label={translate('jhApp.video.title')} id="video-title" name="title" data-cy="title" type="text" />
+              <ValidatedField
+                label={translate('jhApp.video.description')}
+                id="video-description"
+                name="description"
+                data-cy="description"
+                type="text"
+              />
+              <ValidatedField
+                label={translate('jhApp.video.releaseYear')}
+                id="video-releaseYear"
+                name="releaseYear"
+                data-cy="releaseYear"
+                type="text"
+              />
+              <ValidatedField
+                label={translate('jhApp.video.classification')}
+                id="video-classification"
+                name="classification"
+                data-cy="classification"
+                type="text"
+              />
+              <ValidatedField
+                label={translate('jhApp.video.duration')}
+                id="video-duration"
+                name="duration"
+                data-cy="duration"
+                type="text"
+              />
+              <ValidatedField label={translate('jhApp.video.episode')} id="video-episode" name="episode" data-cy="episode" type="text" />
+              <ValidatedField label={translate('jhApp.video.season')} id="video-season" name="season" data-cy="season" type="text" />
+              <ValidatedField label={translate('jhApp.video.rating')} id="video-rating" name="rating" data-cy="rating" type="select">
                 {ratingValues.map(rating => (
                   <option value={rating} key={rating}>
-                    {rating}
+                    {translate('jhApp.Rating.' + rating)}
                   </option>
                 ))}
               </ValidatedField>
-              <ValidatedField label="Video URL" id="video-videoURL" name="videoURL" data-cy="videoURL" type="text" />
+              <ValidatedField
+                label={translate('jhApp.video.videoURL')}
+                id="video-videoURL"
+                name="videoURL"
+                data-cy="videoURL"
+                type="text"
+              />
               <Button tag={Link} id="cancel-save" data-cy="entityCreateCancelButton" to="/video" replace color="info">
                 <FontAwesomeIcon icon="arrow-left" />
                 &nbsp;
-                <span className="d-none d-md-inline">Back</span>
+                <span className="d-none d-md-inline">
+                  <Translate contentKey="entity.action.back">Back</Translate>
+                </span>
               </Button>
               &nbsp;
               <Button color="primary" id="save-entity" data-cy="entityCreateSaveButton" type="submit" disabled={updating}>
                 <FontAwesomeIcon icon="save" />
-                &nbsp; Save
+                &nbsp;
+                <Translate contentKey="entity.action.save">Save</Translate>
               </Button>
             </ValidatedForm>
           )}

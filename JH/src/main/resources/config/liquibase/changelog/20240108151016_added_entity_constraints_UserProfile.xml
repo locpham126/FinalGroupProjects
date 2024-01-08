@@ -6,7 +6,7 @@
     <!--
         Added the constraints for entity UserProfile.
     -->
-    <changeSet id="20240105223746-2" author="jhipster">
+    <changeSet id="20240108151016-2" author="jhipster">
 
         <addForeignKeyConstraint baseColumnNames="playlist_id"
                                  baseTableName="user_profile"
