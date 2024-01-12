@@ -36,8 +36,8 @@ class VideoResourceIT {
     private static final String DEFAULT_DESCRIPTION = "AAAAAAAAAA";
     private static final String UPDATED_DESCRIPTION = "BBBBBBBBBB";
 
-    private static final Integer DEFAULT_YEAR = 1;
-    private static final Integer UPDATED_YEAR = 2;
+    private static final Integer DEFAULT_RELEASE_YEAR = 1;
+    private static final Integer UPDATED_RELEASE_YEAR = 2;
 
     private static final String DEFAULT_CLASSIFICATION = "AAAAAAAAAA";
     private static final String UPDATED_CLASSIFICATION = "BBBBBBBBBB";
@@ -84,7 +84,7 @@ class VideoResourceIT {
         Video video = new Video()
             .title(DEFAULT_TITLE)
             .description(DEFAULT_DESCRIPTION)
-            .year(DEFAULT_YEAR)
+            .releaseYear(DEFAULT_RELEASE_YEAR)
             .classification(DEFAULT_CLASSIFICATION)
             .duration(DEFAULT_DURATION)
             .episode(DEFAULT_EPISODE)
@@ -104,7 +104,7 @@ class VideoResourceIT {
         Video video = new Video()
             .title(UPDATED_TITLE)
             .description(UPDATED_DESCRIPTION)
-            .year(UPDATED_YEAR)
+            .releaseYear(UPDATED_RELEASE_YEAR)
             .classification(UPDATED_CLASSIFICATION)
             .duration(UPDATED_DURATION)
             .episode(UPDATED_EPISODE)
@@ -134,7 +134,7 @@ class VideoResourceIT {
         Video testVideo = videoList.get(videoList.size() - 1);
         assertThat(testVideo.getTitle()).isEqualTo(DEFAULT_TITLE);
         assertThat(testVideo.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
-        assertThat(testVideo.getYear()).isEqualTo(DEFAULT_YEAR);
+        assertThat(testVideo.getReleaseYear()).isEqualTo(DEFAULT_RELEASE_YEAR);
         assertThat(testVideo.getClassification()).isEqualTo(DEFAULT_CLASSIFICATION);
         assertThat(testVideo.getDuration()).isEqualTo(DEFAULT_DURATION);
         assertThat(testVideo.getEpisode()).isEqualTo(DEFAULT_EPISODE);
@@ -175,7 +175,7 @@ class VideoResourceIT {
             .andExpect(jsonPath("$.[*].id").value(hasItem(video.getId().intValue())))
             .andExpect(jsonPath("$.[*].title").value(hasItem(DEFAULT_TITLE)))
             .andExpect(jsonPath("$.[*].description").value(hasItem(DEFAULT_DESCRIPTION)))
-            .andExpect(jsonPath("$.[*].year").value(hasItem(DEFAULT_YEAR)))
+            .andExpect(jsonPath("$.[*].releaseYear").value(hasItem(DEFAULT_RELEASE_YEAR)))
             .andExpect(jsonPath("$.[*].classification").value(hasItem(DEFAULT_CLASSIFICATION)))
             .andExpect(jsonPath("$.[*].duration").value(hasItem(DEFAULT_DURATION)))
             .andExpect(jsonPath("$.[*].episode").value(hasItem(DEFAULT_EPISODE)))
@@ -198,7 +198,7 @@ class VideoResourceIT {
             .andExpect(jsonPath("$.id").value(video.getId().intValue()))
             .andExpect(jsonPath("$.title").value(DEFAULT_TITLE))
             .andExpect(jsonPath("$.description").value(DEFAULT_DESCRIPTION))
-            .andExpect(jsonPath("$.year").value(DEFAULT_YEAR))
+            .andExpect(jsonPath("$.releaseYear").value(DEFAULT_RELEASE_YEAR))
             .andExpect(jsonPath("$.classification").value(DEFAULT_CLASSIFICATION))
             .andExpect(jsonPath("$.duration").value(DEFAULT_DURATION))
             .andExpect(jsonPath("$.episode").value(DEFAULT_EPISODE))
@@ -229,7 +229,7 @@ class VideoResourceIT {
         updatedVideo
             .title(UPDATED_TITLE)
             .description(UPDATED_DESCRIPTION)
-            .year(UPDATED_YEAR)
+            .releaseYear(UPDATED_RELEASE_YEAR)
             .classification(UPDATED_CLASSIFICATION)
             .duration(UPDATED_DURATION)
             .episode(UPDATED_EPISODE)
@@ -251,7 +251,7 @@ class VideoResourceIT {
         Video testVideo = videoList.get(videoList.size() - 1);
         assertThat(testVideo.getTitle()).isEqualTo(UPDATED_TITLE);
         assertThat(testVideo.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
-        assertThat(testVideo.getYear()).isEqualTo(UPDATED_YEAR);
+        assertThat(testVideo.getReleaseYear()).isEqualTo(UPDATED_RELEASE_YEAR);
         assertThat(testVideo.getClassification()).isEqualTo(UPDATED_CLASSIFICATION);
         assertThat(testVideo.getDuration()).isEqualTo(UPDATED_DURATION);
         assertThat(testVideo.getEpisode()).isEqualTo(UPDATED_EPISODE);
@@ -330,7 +330,7 @@ class VideoResourceIT {
 
         partialUpdatedVideo
             .title(UPDATED_TITLE)
-            .year(UPDATED_YEAR)
+            .releaseYear(UPDATED_RELEASE_YEAR)
             .season(UPDATED_SEASON)
             .rating(UPDATED_RATING)
             .videoURL(UPDATED_VIDEO_URL);
@@ -349,7 +349,7 @@ class VideoResourceIT {
         Video testVideo = videoList.get(videoList.size() - 1);
         assertThat(testVideo.getTitle()).isEqualTo(UPDATED_TITLE);
         assertThat(testVideo.getDescription()).isEqualTo(DEFAULT_DESCRIPTION);
-        assertThat(testVideo.getYear()).isEqualTo(UPDATED_YEAR);
+        assertThat(testVideo.getReleaseYear()).isEqualTo(UPDATED_RELEASE_YEAR);
         assertThat(testVideo.getClassification()).isEqualTo(DEFAULT_CLASSIFICATION);
         assertThat(testVideo.getDuration()).isEqualTo(DEFAULT_DURATION);
         assertThat(testVideo.getEpisode()).isEqualTo(DEFAULT_EPISODE);
@@ -373,7 +373,7 @@ class VideoResourceIT {
         partialUpdatedVideo
             .title(UPDATED_TITLE)
             .description(UPDATED_DESCRIPTION)
-            .year(UPDATED_YEAR)
+            .releaseYear(UPDATED_RELEASE_YEAR)
             .classification(UPDATED_CLASSIFICATION)
             .duration(UPDATED_DURATION)
             .episode(UPDATED_EPISODE)
@@ -395,7 +395,7 @@ class VideoResourceIT {
         Video testVideo = videoList.get(videoList.size() - 1);
         assertThat(testVideo.getTitle()).isEqualTo(UPDATED_TITLE);
         assertThat(testVideo.getDescription()).isEqualTo(UPDATED_DESCRIPTION);
-        assertThat(testVideo.getYear()).isEqualTo(UPDATED_YEAR);
+        assertThat(testVideo.getReleaseYear()).isEqualTo(UPDATED_RELEASE_YEAR);
         assertThat(testVideo.getClassification()).isEqualTo(UPDATED_CLASSIFICATION);
         assertThat(testVideo.getDuration()).isEqualTo(UPDATED_DURATION);
         assertThat(testVideo.getEpisode()).isEqualTo(UPDATED_EPISODE);

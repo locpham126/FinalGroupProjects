@@ -1,6 +1,6 @@
 {
   "annotations": {
-    "changelogDate": "20240105223746"
+    "changelogDate": "20240108151016"
   },
   "applications": "*",
   "entityTableName": "user_profile",

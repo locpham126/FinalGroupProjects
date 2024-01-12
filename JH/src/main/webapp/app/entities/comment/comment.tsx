@@ -66,14 +66,16 @@ export const Comment = () => {
   return (
     <div>
       <h2 id="comment-heading" data-cy="CommentHeading">
-        Comments
+        <Translate contentKey="jhApp.comment.home.title">Comments</Translate>
         <div className="d-flex justify-content-end">
           <Button className="me-2" color="info" onClick={handleSyncList} disabled={loading}>
-            <FontAwesomeIcon icon="sync" spin={loading} /> Refresh list
+            <FontAwesomeIcon icon="sync" spin={loading} />{' '}
+            <Translate contentKey="jhApp.comment.home.refreshListLabel">Refresh List</Translate>
           </Button>
           <Link to="/comment/new" className="btn btn-primary jh-create-entity" id="jh-create-entity" data-cy="entityCreateButton">
             <FontAwesomeIcon icon="plus" />
-            &nbsp; Create a new Comment
+            &nbsp;
+            <Translate contentKey="jhApp.comment.home.createLabel">Create new Comment</Translate>
           </Link>
         </div>
       </h2>
@@ -83,19 +85,20 @@ export const Comment = () => {
             <thead>
               <tr>
                 <th className="hand" onClick={sort('id')}>
-                  ID <FontAwesomeIcon icon={getSortIconByFieldName('id')} />
+                  <Translate contentKey="jhApp.comment.id">ID</Translate> <FontAwesomeIcon icon={getSortIconByFieldName('id')} />
                 </th>
                 <th className="hand" onClick={sort('post')}>
-                  Post <FontAwesomeIcon icon={getSortIconByFieldName('post')} />
+                  <Translate contentKey="jhApp.comment.post">Post</Translate> <FontAwesomeIcon icon={getSortIconByFieldName('post')} />
                 </th>
                 <th className="hand" onClick={sort('thumbsUp')}>
-                  Thumbs Up <FontAwesomeIcon icon={getSortIconByFieldName('thumbsUp')} />
+                  <Translate contentKey="jhApp.comment.thumbsUp">Thumbs Up</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('thumbsUp')} />
                 </th>
                 <th>
-                  Video <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="jhApp.comment.video">Video</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th>
-                  Posted By <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="jhApp.comment.postedBy">Posted By</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th />
               </tr>
@@ -115,10 +118,16 @@ export const Comment = () => {
                   <td className="text-end">
                     <div className="btn-group flex-btn-group-container">
                       <Button tag={Link} to={`/comment/${comment.id}`} color="info" size="sm" data-cy="entityDetailsButton">
-                        <FontAwesomeIcon icon="eye" /> <span className="d-none d-md-inline">View</span>
+                        <FontAwesomeIcon icon="eye" />{' '}
+                        <span className="d-none d-md-inline">
+                          <Translate contentKey="entity.action.view">View</Translate>
+                        </span>
                       </Button>
                       <Button tag={Link} to={`/comment/${comment.id}/edit`} color="primary" size="sm" data-cy="entityEditButton">
-                        <FontAwesomeIcon icon="pencil-alt" /> <span className="d-none d-md-inline">Edit</span>
+                        <FontAwesomeIcon icon="pencil-alt" />{' '}
+                        <span className="d-none d-md-inline">
+                          <Translate contentKey="entity.action.edit">Edit</Translate>
+                        </span>
                       </Button>
                       <Button
                         onClick={() => (window.location.href = `/comment/${comment.id}/delete`)}
@@ -126,7 +135,10 @@ export const Comment = () => {
                         size="sm"
                         data-cy="entityDeleteButton"
                       >
-                        <FontAwesomeIcon icon="trash" /> <span className="d-none d-md-inline">Delete</span>
+                        <FontAwesomeIcon icon="trash" />{' '}
+                        <span className="d-none d-md-inline">
+                          <Translate contentKey="entity.action.delete">Delete</Translate>
+                        </span>
                       </Button>
                     </div>
                   </td>
@@ -135,7 +147,11 @@ export const Comment = () => {
             </tbody>
           </Table>
         ) : (
-          !loading && <div className="alert alert-warning">No Comments found</div>
+          !loading && (
+            <div className="alert alert-warning">
+              <Translate contentKey="jhApp.comment.home.notFound">No Comments found</Translate>
+            </div>
+          )
         )}
       </div>
     </div>

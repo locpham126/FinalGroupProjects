@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { Button, Row, Col, FormText } from 'reactstrap';
-import { isNumber, ValidatedField, ValidatedForm } from 'react-jhipster';
+import { isNumber, Translate, translate, ValidatedField, ValidatedForm } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { convertDateTimeFromServer, convertDateTimeToServer, displayDefaultDateTime } from 'app/shared/util/date-utils';
@@ -88,7 +88,7 @@ export const CommentUpdate = () => {
       <Row className="justify-content-center">
         <Col md="8">
           <h2 id="jhApp.comment.home.createOrEditLabel" data-cy="CommentCreateUpdateHeading">
-            Create or edit a Comment
+            <Translate contentKey="jhApp.comment.home.createOrEditLabel">Create or edit a Comment</Translate>
           </h2>
         </Col>
       </Row>
@@ -98,10 +98,25 @@ export const CommentUpdate = () => {
             <p>Loading...</p>
           ) : (
             <ValidatedForm defaultValues={defaultValues()} onSubmit={saveEntity}>
-              {!isNew ? <ValidatedField name="id" required readOnly id="comment-id" label="ID" validate={{ required: true }} /> : null}
-              <ValidatedField label="Post" id="comment-post" name="post" data-cy="post" type="text" />
-              <ValidatedField label="Thumbs Up" id="comment-thumbsUp" name="thumbsUp" data-cy="thumbsUp" type="text" />
-              <ValidatedField id="comment-video" name="video" data-cy="video" label="Video" type="select">
+              {!isNew ? (
+                <ValidatedField
+                  name="id"
+                  required
+                  readOnly
+                  id="comment-id"
+                  label={translate('global.field.id')}
+                  validate={{ required: true }}
+                />
+              ) : null}
+              <ValidatedField label={translate('jhApp.comment.post')} id="comment-post" name="post" data-cy="post" type="text" />
+              <ValidatedField
+                label={translate('jhApp.comment.thumbsUp')}
+                id="comment-thumbsUp"
+                name="thumbsUp"
+                data-cy="thumbsUp"
+                type="text"
+              />
+              <ValidatedField id="comment-video" name="video" data-cy="video" label={translate('jhApp.comment.video')} type="select">
                 <option value="" key="0" />
                 {videos
                   ? videos.map(otherEntity => (
@@ -111,7 +126,13 @@ export const CommentUpdate = () => {
                     ))
                   : null}
               </ValidatedField>
-              <ValidatedField id="comment-postedBy" name="postedBy" data-cy="postedBy" label="Posted By" type="select">
+              <ValidatedField
+                id="comment-postedBy"
+                name="postedBy"
+                data-cy="postedBy"
+                label={translate('jhApp.comment.postedBy')}
+                type="select"
+              >
                 <option value="" key="0" />
                 {userProfiles
                   ? userProfiles.map(otherEntity => (
@@ -124,12 +145,15 @@ export const CommentUpdate = () => {
               <Button tag={Link} id="cancel-save" data-cy="entityCreateCancelButton" to="/comment" replace color="info">
                 <FontAwesomeIcon icon="arrow-left" />
                 &nbsp;
-                <span className="d-none d-md-inline">Back</span>
+                <span className="d-none d-md-inline">
+                  <Translate contentKey="entity.action.back">Back</Translate>
+                </span>
               </Button>
               &nbsp;
               <Button color="primary" id="save-entity" data-cy="entityCreateSaveButton" type="submit" disabled={updating}>
                 <FontAwesomeIcon icon="save" />
-                &nbsp; Save
+                &nbsp;
+                <Translate contentKey="entity.action.save">Save</Translate>
               </Button>
             </ValidatedForm>
           )}

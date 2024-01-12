@@ -1,6 +1,6 @@
 {
   "annotations": {
-    "changelogDate": "20240105224046"
+    "changelogDate": "20240108151316"
   },
   "applications": "*",
   "entityTableName": "comment",

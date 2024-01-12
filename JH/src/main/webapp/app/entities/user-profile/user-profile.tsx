@@ -66,14 +66,16 @@ export const UserProfile = () => {
   return (
     <div>
       <h2 id="user-profile-heading" data-cy="UserProfileHeading">
-        User Profiles
+        <Translate contentKey="jhApp.userProfile.home.title">User Profiles</Translate>
         <div className="d-flex justify-content-end">
           <Button className="me-2" color="info" onClick={handleSyncList} disabled={loading}>
-            <FontAwesomeIcon icon="sync" spin={loading} /> Refresh list
+            <FontAwesomeIcon icon="sync" spin={loading} />{' '}
+            <Translate contentKey="jhApp.userProfile.home.refreshListLabel">Refresh List</Translate>
           </Button>
           <Link to="/user-profile/new" className="btn btn-primary jh-create-entity" id="jh-create-entity" data-cy="entityCreateButton">
             <FontAwesomeIcon icon="plus" />
-            &nbsp; Create a new User Profile
+            &nbsp;
+            <Translate contentKey="jhApp.userProfile.home.createLabel">Create new User Profile</Translate>
           </Link>
         </div>
       </h2>
@@ -83,22 +85,26 @@ export const UserProfile = () => {
             <thead>
               <tr>
                 <th className="hand" onClick={sort('id')}>
-                  ID <FontAwesomeIcon icon={getSortIconByFieldName('id')} />
+                  <Translate contentKey="jhApp.userProfile.id">ID</Translate> <FontAwesomeIcon icon={getSortIconByFieldName('id')} />
                 </th>
                 <th className="hand" onClick={sort('userName')}>
-                  User Name <FontAwesomeIcon icon={getSortIconByFieldName('userName')} />
+                  <Translate contentKey="jhApp.userProfile.userName">User Name</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('userName')} />
                 </th>
                 <th className="hand" onClick={sort('firstName')}>
-                  First Name <FontAwesomeIcon icon={getSortIconByFieldName('firstName')} />
+                  <Translate contentKey="jhApp.userProfile.firstName">First Name</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('firstName')} />
                 </th>
                 <th className="hand" onClick={sort('lastName')}>
-                  Last Name <FontAwesomeIcon icon={getSortIconByFieldName('lastName')} />
+                  <Translate contentKey="jhApp.userProfile.lastName">Last Name</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('lastName')} />
                 </th>
                 <th className="hand" onClick={sort('email')}>
-                  Email <FontAwesomeIcon icon={getSortIconByFieldName('email')} />
+                  <Translate contentKey="jhApp.userProfile.email">Email</Translate>{' '}
+                  <FontAwesomeIcon icon={getSortIconByFieldName('email')} />
                 </th>
                 <th>
-                  Playlist <FontAwesomeIcon icon="sort" />
+                  <Translate contentKey="jhApp.userProfile.playlist">Playlist</Translate> <FontAwesomeIcon icon="sort" />
                 </th>
                 <th />
               </tr>
@@ -119,10 +125,16 @@ export const UserProfile = () => {
                   <td className="text-end">
                     <div className="btn-group flex-btn-group-container">
                       <Button tag={Link} to={`/user-profile/${userProfile.id}`} color="info" size="sm" data-cy="entityDetailsButton">
-                        <FontAwesomeIcon icon="eye" /> <span className="d-none d-md-inline">View</span>
+                        <FontAwesomeIcon icon="eye" />{' '}
+                        <span className="d-none d-md-inline">
+                          <Translate contentKey="entity.action.view">View</Translate>
+                        </span>
                       </Button>
                       <Button tag={Link} to={`/user-profile/${userProfile.id}/edit`} color="primary" size="sm" data-cy="entityEditButton">
-                        <FontAwesomeIcon icon="pencil-alt" /> <span className="d-none d-md-inline">Edit</span>
+                        <FontAwesomeIcon icon="pencil-alt" />{' '}
+                        <span className="d-none d-md-inline">
+                          <Translate contentKey="entity.action.edit">Edit</Translate>
+                        </span>
                       </Button>
                       <Button
                         onClick={() => (window.location.href = `/user-profile/${userProfile.id}/delete`)}
@@ -130,7 +142,10 @@ export const UserProfile = () => {
                         size="sm"
                         data-cy="entityDeleteButton"
                       >
-                        <FontAwesomeIcon icon="trash" /> <span className="d-none d-md-inline">Delete</span>
+                        <FontAwesomeIcon icon="trash" />{' '}
+                        <span className="d-none d-md-inline">
+                          <Translate contentKey="entity.action.delete">Delete</Translate>
+                        </span>
                       </Button>
                     </div>
                   </td>
@@ -139,7 +154,11 @@ export const UserProfile = () => {
             </tbody>
           </Table>
         ) : (
-          !loading && <div className="alert alert-warning">No User Profiles found</div>
+          !loading && (
+            <div className="alert alert-warning">
+              <Translate contentKey="jhApp.userProfile.home.notFound">No User Profiles found</Translate>
+            </div>
+          )
         )}
       </div>
     </div>

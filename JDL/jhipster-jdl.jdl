@@ -9,7 +9,7 @@ entity UserProfile {
 entity Video {
 	title String
     description String
-    year Integer
+    releaseYear Integer
     classification String
     duration Integer
     episode Integer
