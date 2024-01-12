@@ -1,5 +1,6 @@
 package com.mycompany.myapp.service;
 
+
 import com.mycompany.myapp.domain.Video;
 import com.mycompany.myapp.repository.VideoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,5 +52,6 @@ public class VideoService {
         Video videoToBeDeleted = this.readById(id);
         repository.delete(videoToBeDeleted);
         return videoToBeDeleted;
+
     }
 }
