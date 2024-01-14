@@ -1,5 +1,5 @@
 import React from 'react';
-import './AppUser.scss';
+import './cssfiles/AppUser.scss';
 import {Translate} from "react-jhipster";
 import {useLocation, useNavigate} from "react-router-dom";
 import {useAppDispatch} from "app/config/store";

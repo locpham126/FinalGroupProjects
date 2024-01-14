@@ -1,8 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import axios from './axios';
-import './AppUser.scss';
-
-
+import './cssfiles/Row.scss';
 
 function Row( {categoryTitle, fetchUrl} ) {
   const [videos, setVideos] = useState([]);
@@ -10,7 +8,7 @@ function Row( {categoryTitle, fetchUrl} ) {
     //async function to fetch data into 
     async function fetchData(){
       const request = await axios.get(fetchUrl);
-      console.log(request);
+      // console.log(request);
       setVideos(request.data.videos);
       return request;
     }
@@ -32,9 +30,13 @@ function Row( {categoryTitle, fetchUrl} ) {
     <div className = "row">
       {/*   title */}
       <h2>{categoryTitle}</h2>
-      <div className="row_posters">
+      <div className="row_images">
         {videos.map(video => (
-          <img src={video.imageURL} className='resized-image' alt={video.title}/>
+          <img 
+          key={video.id}
+          className='row_image' 
+          src={video.imageURL} 
+          alt={video.title}/>
         ))}
       </div>
       {/* containt -> posters */}
