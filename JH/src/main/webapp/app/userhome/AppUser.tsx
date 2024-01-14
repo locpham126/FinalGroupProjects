@@ -1,15 +1,15 @@
 import React from 'react';
-import './AppUser.scss';
+import './cssfiles/AppUser.scss';
 import {Translate} from "react-jhipster";
 import {useLocation, useNavigate} from "react-router-dom";
 import {useAppDispatch} from "app/config/store";
 import Row from "./Row";
 import requests from "./requests";
-
+import Banner from "./Banner";
+import Navi from "./Navi";
 //page to reroute login.users
 function AppUser(){
   const dispatch = useAppDispatch();
-
   const pageLocation = useLocation();
   const navigate = useNavigate();
   const routeToUserHome = () => {
@@ -20,24 +20,29 @@ function AppUser(){
   return(
     <>
     <div className ="AppUser">
+      {/* <Navi/> */}
+      <Banner/>
       <h1>
-        Howdy this is the User Homepage
+        Howdy! Welcome to VLA (Netflix Clone)
       </h1>
-      <Row title = "Action" fetchUrl={requests.fetchAction} />
-      <Row title = "Romance" fetchUrl={requests.fetchRomance}/>
-      <Row title = "Comedy" fetchUrl={requests.fetchComedy}/>
-      <Row title = "Fantasy" fetchUrl={requests.fetchAction} />
-      <Row title = "Animation" fetchUrl={requests.fetchRomance}/>
-      <Row title = "Horror" fetchUrl={requests.fetchComedy}/>
-      <Row title = "Sci-Fi" fetchUrl={requests.fetchAction} />
-      <Row title = "Drama" fetchUrl={requests.fetchRomance}/>
-      <Row title = "Adventure" fetchUrl={requests.fetchComedy}/>
-      <Row title = "Crime" fetchUrl={requests.fetchAction} />
-      <Row title = "Thriller" fetchUrl={requests.fetchRomance}/>
-      <Row title = "Music" fetchUrl={requests.fetchComedy}/>
-      <Row title = "Family" fetchUrl={requests.fetchAction} />
-      <Row title = "Sports" fetchUrl={requests.fetchRomance}/>
-      <Row title = "Biography" fetchUrl={requests.fetchComedy}/>
+      <h2> 
+        
+      </h2>
+      <Row categoryTitle = "Action" fetchUrl={requests.fetchAction} />
+      <Row categoryTitle = "Romance" fetchUrl={requests.fetchRomance}/>
+      <Row categoryTitle = "Comedy" fetchUrl={requests.fetchComedy}/>
+      <Row categoryTitle = "Fantasy" fetchUrl={requests.fetchAction} />
+      <Row categoryTitle = "Animation" fetchUrl={requests.fetchRomance}/>
+      <Row categoryTitle = "Horror" fetchUrl={requests.fetchComedy}/>
+      <Row categoryTitle = "Sci-Fi" fetchUrl={requests.fetchAction} />
+      <Row categoryTitle = "Drama" fetchUrl={requests.fetchRomance}/>
+      <Row categoryTitle = "Adventure" fetchUrl={requests.fetchComedy}/>
+      <Row categoryTitle = "Crime" fetchUrl={requests.fetchAction} />
+      <Row categoryTitle = "Thriller" fetchUrl={requests.fetchRomance}/>
+      <Row categoryTitle = "Music" fetchUrl={requests.fetchComedy}/>
+      <Row categoryTitle = "Family" fetchUrl={requests.fetchAction} />
+      <Row categoryTitle = "Sports" fetchUrl={requests.fetchRomance}/>
+      <Row categoryTitle = "Biography" fetchUrl={requests.fetchComedy}/>
     </div>
     </>
   );
