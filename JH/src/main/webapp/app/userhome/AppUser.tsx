@@ -5,6 +5,8 @@ import {useLocation, useNavigate} from "react-router-dom";
 import {useAppDispatch} from "app/config/store";
 import Row from "./Row";
 import requests from "./requests";
+import Banner from "./Banner";
+import Navi from "./Navi";
 //page to reroute login.users
 function AppUser(){
   const dispatch = useAppDispatch();
@@ -18,9 +20,14 @@ function AppUser(){
   return(
     <>
     <div className ="AppUser">
+      {/* <Navi/> */}
+      <Banner/>
       <h1>
         Howdy! Welcome to VLA (Netflix Clone)
       </h1>
+      <h2> 
+        
+      </h2>
       <Row categoryTitle = "Action" fetchUrl={requests.fetchAction} />
       <Row categoryTitle = "Romance" fetchUrl={requests.fetchRomance}/>
       <Row categoryTitle = "Comedy" fetchUrl={requests.fetchComedy}/>
