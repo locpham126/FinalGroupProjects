@@ -1,25 +1,40 @@
 import React, {useState, useEffect} from 'react';
 import axios from './axios';
+import './AppUser.scss';
 
 
-function Row( {title, fetchUrl} ) {
+
+function Row( {categoryTitle, fetchUrl} ) {
   const [videos, setVideos] = useState([]);
-  useEffect(() => {
+  useEffect(() => {     //   'http://localhost:8080'
+    //async function to fetch data into 
     async function fetchData(){
       const request = await axios.get(fetchUrl);
-    //   'http://localhost:8080'
-      setVideos(request.data.results);
+      console.log(request);
+      setVideos(request.data.videos);
       return request;
     }
     fetchData();
   }, [fetchUrl]);
+
+    // console.log(videos);
+   
+   if(!videos)
+     return (
+       <>
+         <p>fetching videos...</p>
+       </>
+     );
+
+  // const { title, backdrop_path } = 
+
   return(
     <div className = "row">
       {/*   title */}
-      <h2>{title}</h2>
-      <div className="row_names">
+      <h2>{categoryTitle}</h2>
+      <div className="row_posters">
         {videos.map(video => (
-          <img src={video.id} alt={video.title}/>
+          <img src={video.imageURL} className='resized-image' alt={video.title}/>
         ))}
       </div>
       {/* containt -> posters */}

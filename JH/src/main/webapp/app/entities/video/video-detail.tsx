@@ -85,6 +85,12 @@ export const VideoDetail = () => {
             </span>
           </dt>
           <dd>{videoEntity.videoURL}</dd>
+          <dt>
+            <span id="imageURL">
+              <Translate contentKey="jhApp.video.imageURL">Image URL</Translate>
+            </span>
+          </dt>
+          <dd>{videoEntity.imageURL}</dd>
         </dl>
         <Button tag={Link} to="/video" replace color="info" data-cy="entityDetailsBackButton">
           <FontAwesomeIcon icon="arrow-left" />{' '}
