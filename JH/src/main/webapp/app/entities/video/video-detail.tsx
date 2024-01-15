@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { Button, Row, Col } from 'reactstrap';
 import { Translate } from 'react-jhipster';
@@ -12,6 +12,7 @@ export const VideoDetail = () => {
   const dispatch = useAppDispatch();
 
   const { id } = useParams<'id'>();
+
 
   useEffect(() => {
     dispatch(getEntity(id));
@@ -74,11 +75,35 @@ export const VideoDetail = () => {
   }
   // end of Tev's HTML Functions
 
+  
   const videoEntity = useAppSelector(state => state.video.entity);
   return (
     <Row>
-      
-      <Col md="8">
+      <center>
+      <img src={videoEntity.imageURL} alt="Video Preview" className="video-image"/>
+      </center>
+      <h1 className="video-title">{videoEntity.title}</h1>
+  {/* <Button class="play-button" tag={Link} to={videoEntity.videoURL}>Play Video</Button> */}
+  
+  {videoEntity.videoURL && (
+    <video height="640" width="720" controls>
+      <source src={videoEntity.videoURL} type="video/mp4"/>
+    </video>
+    )}
+    <div className="video-details">
+        <p>Release Year: {videoEntity.releaseYear}</p>
+        <p>Classification: {videoEntity.classification}</p>
+        <p>Duration: {videoEntity.duration} min</p>
+        <p>Episode: {videoEntity.episode}</p>
+        <p>Season: {videoEntity.season}</p>
+        <p>Rating: {videoEntity.rating}</p>
+      </div>
+     <div className="video-description">
+     <p>Description: {videoEntity.description}</p> 
+ </div>
+
+
+      {/* <Col md="8">
         <h2 data-cy="videoDetailsHeading">
           <Translate contentKey="jhApp.video.detail.title">Video</Translate>
         </h2>
@@ -161,7 +186,7 @@ export const VideoDetail = () => {
             <Translate contentKey="entity.action.back">Back</Translate>
           </span>
         </Button>
-        &nbsp;
+        &nbsp; */}
 
         {/* uncomment code below for edit button back */}
         {/* <Button tag={Link} to={`/video/${videoEntity.id}/edit`} replace color="primary">
@@ -170,7 +195,7 @@ export const VideoDetail = () => {
             <Translate contentKey="entity.action.edit">Edit</Translate>
           </span>
         </Button> */}
-      </Col>
+      {/* </Col> */}
     </Row>
   );
 };
