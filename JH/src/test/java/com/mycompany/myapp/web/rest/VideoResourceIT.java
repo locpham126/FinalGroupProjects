@@ -223,22 +223,25 @@ class VideoResourceIT {
         int databaseSizeBeforeUpdate = videoRepository.findAll().size();
 
         // Update the video
-        Video updatedVideoData = new Video();
-        updatedVideoData.setTitle(UPDATED_TITLE);
-        updatedVideoData.setDescription(UPDATED_DESCRIPTION);
-        updatedVideoData.setReleaseYear(UPDATED_RELEASE_YEAR);
-        updatedVideoData.setClassification(UPDATED_CLASSIFICATION);
-        updatedVideoData.setEpisode(UPDATED_EPISODE);
-        updatedVideoData.setSeason(UPDATED_SEASON);
-        updatedVideoData.setRating(UPDATED_RATING);
-        updatedVideoData.setDuration(UPDATED_DURATION);
-        updatedVideoData.setVideoURL(UPDATED_VIDEO_URL);
+        Video updatedVideo = videoRepository.findById(video.getId()).orElseThrow();
+        // Disconnect from session so that the updates on updatedVideo are not directly saved in db
+        em.detach(updatedVideo);
+        updatedVideo
+            .title(UPDATED_TITLE)
+            .description(UPDATED_DESCRIPTION)
+            .releaseYear(UPDATED_RELEASE_YEAR)
+            .classification(UPDATED_CLASSIFICATION)
+            .duration(UPDATED_DURATION)
+            .episode(UPDATED_EPISODE)
+            .season(UPDATED_SEASON)
+            .rating(UPDATED_RATING)
+            .videoURL(UPDATED_VIDEO_URL);
 
         restVideoMockMvc
             .perform(
-                put("/api/videos/{id}", video.getId())
+                put(ENTITY_API_URL_ID, updatedVideo.getId())
                     .contentType(MediaType.APPLICATION_JSON)
-                    .content(TestUtil.convertObjectToJsonBytes(updatedVideoData))
+                    .content(TestUtil.convertObjectToJsonBytes(updatedVideo))
             )
             .andExpect(status().isOk());
 
@@ -261,14 +264,14 @@ class VideoResourceIT {
     @Transactional
     void putNonExistingVideo() throws Exception {
         int databaseSizeBeforeUpdate = videoRepository.findAll().size();
-
+        video.setId(longCount.incrementAndGet());
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restVideoMockMvc
             .perform(
-                put("/api/videos/{id}", Long.MAX_VALUE)
+                put(ENTITY_API_URL_ID, video.getId())
                     .contentType(MediaType.APPLICATION_JSON)
-                    .content(TestUtil.convertObjectToJsonBytes(new Video()))
+                    .content(TestUtil.convertObjectToJsonBytes(video))
             )
             .andExpect(status().isBadRequest());
 
@@ -281,11 +284,12 @@ class VideoResourceIT {
     @Transactional
     void putWithIdMismatchVideo() throws Exception {
         int databaseSizeBeforeUpdate = videoRepository.findAll().size();
+        video.setId(longCount.incrementAndGet());
 
         // If url ID doesn't match entity ID, it will throw BadRequestAlertException
         restVideoMockMvc
             .perform(
-                put("/api/videos/{id}", Long.MAX_VALUE)
+                put(ENTITY_API_URL_ID, longCount.incrementAndGet())
                     .contentType(MediaType.APPLICATION_JSON)
                     .content(TestUtil.convertObjectToJsonBytes(video))
             )
