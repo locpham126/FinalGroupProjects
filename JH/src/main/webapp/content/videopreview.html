@@ -147,10 +147,12 @@
 
     if (videoUrl) {
     // Check if a video URL is available
+
     window.open(videoUrl, "blank");
   } else {
     // Handle the case when there is no video URL
     alert("Error: No video available.");
+
   }
   }
 
@@ -158,6 +160,8 @@
     // Basic example of a modal for comment input
     const comment = prompt("Add a comment (200 characters or less):");
     if (comment !== null && comment.length <= 200) {
+
+    // Add logic to handle the comment
 
     alert("Comment added: " + comment);
   } else if (comment !== null) {
@@ -188,6 +192,8 @@
   }
 
 
+
+    // Function to be executed when the button is pressed
 
     function goToGenrePage() {
     // Add your logic here
