@@ -2,7 +2,6 @@ package com.mycompany.myapp.web.rest;
 
 import com.mycompany.myapp.domain.Video;
 import com.mycompany.myapp.repository.VideoRepository;
-import com.mycompany.myapp.service.VideoService;
 import com.mycompany.myapp.web.rest.errors.BadRequestAlertException;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -11,7 +10,6 @@ import java.util.Objects;
 import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
@@ -70,28 +68,26 @@ public class VideoResource {
      * or with status {@code 500 (Internal Server Error)} if the video couldn't be updated.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
-
-    @Autowired
-    private  VideoService videoService;
     @PutMapping("/{id}")
-
-    public ResponseEntity<Video> updateVideo(@PathVariable Long id, @RequestBody Video newVideoData)
+    public ResponseEntity<Video> updateVideo(@PathVariable(value = "id", required = false) final Long id, @RequestBody Video video)
         throws URISyntaxException {
-        log.debug("REST request to update Video : {}, {}", id, newVideoData);
+        log.debug("REST request to update Video : {}, {}", id, video);
+        if (video.getId() == null) {
+            throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
+        }
+        if (!Objects.equals(id, video.getId())) {
+            throw new BadRequestAlertException("Invalid ID", ENTITY_NAME, "idinvalid");
+        }
+
         if (!videoRepository.existsById(id)) {
-            throw new BadRequestAlertException("Video not found", ENTITY_NAME, "idnull");
+            throw new BadRequestAlertException("Entity not found", ENTITY_NAME, "idnotfound");
         }
 
-        Video updatedVideo = videoService.update(id, newVideoData);
-
-        if (updatedVideo != null) {
-            return ResponseEntity
-                .ok()
-                .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, id.toString()))
-                .body(updatedVideo);
-        } else {
-            throw new BadRequestAlertException("Video not found", ENTITY_NAME, "idnotfound");
-        }
+        Video result = videoRepository.save(video);
+        return ResponseEntity
+            .ok()
+            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, video.getId().toString()))
+            .body(result);
     }
 
     /**
@@ -191,21 +187,10 @@ public class VideoResource {
      * @param id the id of the video to delete.
      * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
      */
-
-
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteVideo(@PathVariable("id") Long id) {
         log.debug("REST request to delete Video : {}", id);
-
-        // Check if video with specified ID exists
-        Video existingVideo = videoService.readById(id);
-        if (existingVideo == null) {
-            throw  new BadRequestAlertException("Video not found", ENTITY_NAME, "idnotfound");
-        }
-
-        // Delete associated records i.e., comments
-        Video deleteVideo = videoService.deleteById(id);
-
+        videoRepository.deleteById(id);
         return ResponseEntity
             .noContent()
             .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
