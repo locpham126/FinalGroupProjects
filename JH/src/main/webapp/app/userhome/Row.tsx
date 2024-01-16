@@ -11,7 +11,7 @@ function Row( {categoryTitle, fetchUrl} ) {
     //async function to fetch data into 
     async function fetchData(){
       const request = await axios.get(fetchUrl);
-      console.log(request);
+      // console.log(request);
       setVideos(request.data.videos);
       return request;
     }

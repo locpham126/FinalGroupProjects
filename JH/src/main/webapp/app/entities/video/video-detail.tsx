@@ -38,7 +38,7 @@ export const VideoDetail = () => {
     }
     fetchData();
   }, []);
-  // console.log(comments);
+  console.log(comments);
 
   // async function to match user profile to comment
   // useEffect(() => {
@@ -71,9 +71,29 @@ export const VideoDetail = () => {
   }
     function openCommentModal() {
     // Basic example of a modal for comment input
+    const temp = Math.floor(Math.random() * 3)+1;
     const comment = prompt("Add a comment (200 characters or less):");
     if (comment !== null && comment.length <= 200) {
     // Check if comment is valid
+    async function postComment() {
+      try{
+      const request = await axios.post(Request.fetchComments, {
+        method: "POST",
+        post: comment, 
+        postedBy: {
+          id: temp
+        },
+        thumbsup: null,
+        video: {
+          id: id
+        },
+      });
+      return request;
+    } catch(err){
+      console.log(err);
+    }
+    }
+    postComment();
     alert("Comment added: " + comment);
   } else if (comment !== null) {
     alert("Error: Comment must be 200 characters or less.");
@@ -87,11 +107,11 @@ export const VideoDetail = () => {
     const thumbsButton = document.getElementById("thumbsButton");
     thumbsUpClickCount++;
     if (thumbsUpClickCount === 1) {
-    thumbsButton.innerText = "Thumbs Up";
+    thumbsButton.innerText = "Like";
   } else if (thumbsUpClickCount === 2) {
-    thumbsButton.innerText = "Thumbs Down";
+    thumbsButton.innerText = "Dislike";
   } else {
-    thumbsButton.innerText = "Thumbs";
+    thumbsButton.innerText = "Mid";
     thumbsUpClickCount = 0;
   }
   }
@@ -145,6 +165,9 @@ export const VideoDetail = () => {
         </p>
       ))}
     </div>
+    <Button className="comment-button" onClick={thumbsUpDown} id="thumbsButton">Like</Button>
+    <Button className="comment-button" onClick={openCommentModal}>Add a Comment</Button> 
+    <Button onClick={goBack}>Back</Button> 
 
     </Row>
   );
