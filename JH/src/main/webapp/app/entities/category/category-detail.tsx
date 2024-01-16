@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useAppDispatch, useAppSelector } from 'app/config/store';
 
 import { getEntity } from './category.reducer';
+import 'app/entities/entities.scss';
 
 export const CategoryDetail = () => {
   const dispatch = useAppDispatch();
@@ -44,7 +45,7 @@ export const CategoryDetail = () => {
             {categoryEntity.videos
               ? categoryEntity.videos.map((val, i) => (
                   <span key={val.id}>
-                    <a>{val.id}</a>
+                    <a style={{ color: 'white' }}>{val.id}</a>
                     {categoryEntity.videos && i === categoryEntity.videos.length - 1 ? '' : ', '}
                   </span>
                 ))

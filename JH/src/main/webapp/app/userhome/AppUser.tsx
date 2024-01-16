@@ -29,7 +29,7 @@ function AppUser(){
       {/* <Banner/> */}
       <div className='header-container'>
       <h1 style={{ fontSize: '100px' }}>
-        Welcome to VLA
+        Welcome to VOILA
       </h1>
       <img src="/content/images/VLALogo.png" alt="Logo" />
       </div>
