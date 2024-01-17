@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { Button, Row, Col } from 'reactstrap';
+import { Button, Row, Col, CardColumns, Container } from 'reactstrap';
 import { Translate } from 'react-jhipster';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useAppDispatch, useAppSelector } from 'app/config/store';
@@ -38,31 +38,31 @@ export const VideoDetail = () => {
     }
     fetchData();
   }, []);
-  console.log(comments);
+  // console.log(comments);
 
   // async function to match user profile to comment
-  // useEffect(() => {
-  //   async function fetchData() {
-  //     const request = await axios.get(Request.fetchUser);
-  //     let temp = [];
-  //     console.log(request.data);
-  //     for(let i = 0; i < request.data.length; i++){
-  //       let userId = request.data[i].id;
-  //     comments.forEach(comment => {if(userId == comment.postedBy.id){
-  //       temp.push(request.data[i]);
-  //       console.log(request.data[i]);
-  //     }
-  //     });
-  //       if(userId == temp){
-  //         temp.push(request.data[i]);
-  //         console.log(request.data[i]);
-  //       }
-  //     }
-  //     setUser(temp);
-  //     return request;
-  //   }
-  //   fetchData();
-  // }, []);
+  useEffect(() => {
+    async function fetchData() {
+      const request = await axios.get(Request.fetchUser);
+      let temp = [];
+      // console.log(request.data);
+      for(let i = 0; i < request.data.length; i++){
+        let userId = request.data[i].id;
+      comments.forEach(comment => {if(userId == comment.postedBy.id){
+        temp.push(request.data[i]);
+        console.log(request.data[i]);
+      }
+      });
+        if(userId == temp){
+          temp.push(request.data[i]);
+          // console.log(request.data[i]);
+        }
+      }
+      setUser(temp);
+      return request;
+    }
+    fetchData();
+  }, []);
 //  console.log(user);
 
   //Functions
@@ -126,19 +126,29 @@ export const VideoDetail = () => {
 
   
   const videoEntity = useAppSelector(state => state.video.entity);
+  console.log(videoEntity.imageURL);
   return (
-    <Row>
-      <center>
+    <Container>
+      {/* <center>
       <img src={videoEntity.imageURL} alt="Video Preview" className="video-image"/>
-      </center>
+      </center> */}
       <h1 className="video-title">{videoEntity.title}</h1>
   {/* <Button class="play-button" tag={Link} to={videoEntity.videoURL}>Play Video</Button> */}
-  
+
+    <Row>
+    <Col md={3}>
+  <img src={videoEntity.imageURL} alt="Video Preview" className="video-image"/>
+  </Col>
+  <Col md={6}>
   {videoEntity.videoURL && (
-    <video height="640" width="720" controls>
+    <video  className='video-player' controls>
       <source src={videoEntity.videoURL} type="video/mp4"/>
     </video>
     )}
+    </Col> 
+    </Row>
+    
+    {/* <Row> */}
     <div className="video-details">
         <p>Release Year: {videoEntity.releaseYear}</p>
         <p>Classification: {videoEntity.classification}</p>
@@ -167,7 +177,8 @@ export const VideoDetail = () => {
     <Button className="comment-button" onClick={openCommentModule}>Add a Comment</Button> 
     <Button onClick={goBack}>Back</Button> 
 
-    </Row>
+    {/* </Row> */}
+    </Container>
   );
 };
 

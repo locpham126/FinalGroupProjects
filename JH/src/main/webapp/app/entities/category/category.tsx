@@ -7,7 +7,7 @@ import { faSort, faSortUp, faSortDown } from '@fortawesome/free-solid-svg-icons'
 import { ASC, DESC, SORT } from 'app/shared/util/pagination.constants';
 import { overrideSortStateWithQueryParams } from 'app/shared/util/entity-utils';
 import { useAppDispatch, useAppSelector } from 'app/config/store';
-
+import 'app/userhome/cssfiles/videopreview.scss';
 import { getEntities } from './category.reducer';
 
 export const Category = () => {
