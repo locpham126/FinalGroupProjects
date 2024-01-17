@@ -16,7 +16,7 @@ export const VideoDetail = () => {
   const { id } = useParams<'id'>();
   const [comments, setComments] = useState([]);
   const [user, setUser] = useState([]);
-  
+
   useEffect(() => {
     dispatch(getEntity(id));
   }, []);
@@ -70,7 +70,7 @@ export const VideoDetail = () => {
     window.history.back();
   }
 
-    // Function to post comment  
+    // Function to post comment
     function openCommentModule() {
     // Basic example of a modal for comment input
     const temp = Math.floor(Math.random() * 3)+1;
@@ -78,10 +78,10 @@ export const VideoDetail = () => {
     if (comment !== null && comment.length <= 200) {
     // Check if comment is valid
     async function postComment() {
-      try{
+      try{// this allows the function to run until error happens / if error happens then go to catch
       const request = await axios.post(Request.fetchComments, {
         method: "POST",
-        post: comment, 
+        post: comment,
         postedBy: {
           id: temp
         },
@@ -91,7 +91,7 @@ export const VideoDetail = () => {
         },
       });
       return request;
-    } catch(err){
+    } catch(err){ // this prints out the error.
       console.log(err);
     }
     }
@@ -101,9 +101,10 @@ export const VideoDetail = () => {
     alert("Error: Comment must be 200 characters or less.");
   }
   }
-
+ // need to make a fetch command to pull the most resent number in the date db and set it to thumbs up
+  //-upclickCount.
     let thumbsUpClickCount = 0;
-
+  // then create a update function for each time the button is clicked.
     function thumbsUpDown() {
     // Change button text based on click count
     const thumbsButton = document.getElementById("thumbsButton");
@@ -124,7 +125,7 @@ export const VideoDetail = () => {
   // }
   // Functions
 
-  
+
   const videoEntity = useAppSelector(state => state.video.entity);
   return (
     <Row>
@@ -133,7 +134,7 @@ export const VideoDetail = () => {
       </center>
       <h1 className="video-title">{videoEntity.title}</h1>
   {/* <Button class="play-button" tag={Link} to={videoEntity.videoURL}>Play Video</Button> */}
-  
+
   {videoEntity.videoURL && (
     <video height="640" width="720" controls>
       <source src={videoEntity.videoURL} type="video/mp4"/>
@@ -151,12 +152,12 @@ export const VideoDetail = () => {
         </div>
       </div>
      <div className="video-description">
-     <p>Description: {videoEntity.description}</p> 
+     <p>Description: {videoEntity.description}</p>
  </div>
 
     <div className='video-description'>
       Comments:
-      
+
     {comments.map(comment => (
         <p key = {comment.id} className='video-comments'>
           User {comment.postedBy.id}: {comment.post}
@@ -164,8 +165,8 @@ export const VideoDetail = () => {
       ))}
     </div>
     <Button className="comment-button" onClick={thumbsUpDown} id="thumbsButton">Like</Button>
-    <Button className="comment-button" onClick={openCommentModule}>Add a Comment</Button> 
-    <Button onClick={goBack}>Back</Button> 
+    <Button className="comment-button" onClick={openCommentModule}>Add a Comment</Button>
+    <Button onClick={goBack}>Back</Button>
 
     </Row>
   );
