@@ -29,10 +29,11 @@ function AppUser(){
       {/* <Banner/> */}
       <div className='header-container'>
       <h1 style={{ fontSize: '100px' }}>
-        Welcome to VOILA
+       VOILÀ
       </h1>
       <img src="/content/images/VLALogo.png" alt="Logo" />
       </div>
+      {/* <Row categoryTitle = "Favorites" fetchUrl={requests.fetchPlaylist1} /> */}
       <Row categoryTitle = "Action" fetchUrl={requests.fetchAction} />
       <Row categoryTitle = "Romance" fetchUrl={requests.fetchRomance}/>
       <Row categoryTitle = "Comedy" fetchUrl={requests.fetchComedy}/>
