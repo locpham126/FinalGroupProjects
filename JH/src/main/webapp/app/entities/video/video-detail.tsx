@@ -15,7 +15,7 @@ export const VideoDetail = () => {
   const dispatch = useAppDispatch();
   const { id } = useParams<'id'>();
   const [comments, setComments] = useState([]);
-  const [user, setUser] = useState([]);
+  const [users, setUsers] = useState([]);
   
   useEffect(() => {
     dispatch(getEntity(id));
@@ -38,32 +38,20 @@ export const VideoDetail = () => {
     }
     fetchData();
   }, []);
-  // console.log(comments);
-
+  // comments.forEach(comment => {
+  //   console.log(comment.postedBy.id);
+  // });
   // async function to match user profile to comment
   useEffect(() => {
     async function fetchData() {
       const request = await axios.get(Request.fetchUser);
       let temp = [];
-      // console.log(request.data);
-      for(let i = 0; i < request.data.length; i++){
-        let userId = request.data[i].id;
-      comments.forEach(comment => {if(userId == comment.postedBy.id){
-        temp.push(request.data[i]);
-        console.log(request.data[i]);
-      }
-      });
-        if(userId == temp){
-          temp.push(request.data[i]);
-          // console.log(request.data[i]);
-        }
-      }
-      setUser(temp);
-      return request;
+      setUsers(request.data);
+       return request;
     }
     fetchData();
   }, []);
-//  console.log(user);
+ console.log(users);
 
   //Functions
   function goBack() {
@@ -126,7 +114,7 @@ export const VideoDetail = () => {
 
   
   const videoEntity = useAppSelector(state => state.video.entity);
-  console.log(videoEntity.imageURL);
+
   return (
     <Container>
       {/* <center>
@@ -166,11 +154,17 @@ export const VideoDetail = () => {
 
     <div className='video-description'>
       Comments:
-      
+    {users.map
+    (user => (  
+      <p key = {user.id} className='video-comments'>
     {comments.map(comment => (
-        <p key = {comment.id} className='video-comments'>
-          User {comment.postedBy.id}: {comment.post}
-        </p>
+        <div>
+        {user.id ===comment.postedBy.id && <p key = {comment.id} className='video-comments'>
+         {user.userName}: {comment.post}
+        </p>}
+        </div>
+      ))}
+      </p>
       ))}
     </div>
     <Button className="comment-button" onClick={thumbsUpDown} id="thumbsButton">Like</Button>
